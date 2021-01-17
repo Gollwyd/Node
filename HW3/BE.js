@@ -1,5 +1,3 @@
-const http = require('http')
-const url = require('url')
 const NamesModel = require('./NamesModel')
 const express = require('express')
 const port = 8080
@@ -18,7 +16,7 @@ app.use((req, res, next)=>{
 app.post('/', (req, res)=>{
     const ip = req.ip;
     const name = req.query.name;
-    
+
     res.send(`Hi ${name}`);
 
     new NamesModel(name, ip).save();
