@@ -11,7 +11,10 @@ const requestHandler = (request, response) => {
         response.writeHead(200, {'Content-Type': 'text/html'});
         const urlRequest = url.parse(request.url, true);
         response.end(`Hi ${urlRequest.query.name}`);
-        new NamesModel(urlRequest.query.name, request.socket.localAddress);
+        const newUser = new Promise((resolve)=>{
+           resolve(new NamesModel(urlRequest.query.name, request.socket.localAddress));
+        });
+       newUser.then((user)=>user.save())
         
     }) 
 }
